@@ -32,7 +32,6 @@ class HomeFragment : Fragment()
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
         addAssessments()
-
     }
 
     private fun setUpRecyclerView()
@@ -66,7 +65,6 @@ class HomeFragment : Fragment()
             )
         )
     }
-
 
     override fun onDestroyView()
     {

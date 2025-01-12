@@ -11,14 +11,14 @@ class AssessmentAdapter(private val onItemClick: (Int) -> Unit) :
 {
     private val assessments = mutableListOf<Assessment>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AssessmentAdapter.ViewHolder
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
     {
         val binding =
             ItemAssessmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AssessmentAdapter.ViewHolder, position: Int)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
         holder.bind(assessments[position])
         holder.itemView.setOnClickListener { onItemClick(position) }
