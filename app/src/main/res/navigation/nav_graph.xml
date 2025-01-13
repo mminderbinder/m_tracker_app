@@ -7,6 +7,8 @@
     <fragment
         android:id="@+id/fragmentHome"
         android:name="com.example.mtrackerapp.ui.HomeFragment"
-        android:label="fragment_home"></fragment>
+        android:label="fragment_home">
+
+    </fragment>
 
 </navigation>

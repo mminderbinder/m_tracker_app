@@ -52,6 +52,7 @@ class HomeFragment : Fragment()
     {
         adapter.addAssessment(
             Assessment(
+                assessmentId = 12500,
                 assessmentTitle = "GAD-7",
                 assessmentName = "Generalized Anxiety Disorder 7",
                 description = "Lorem ipsum dolor sit amet...",
@@ -59,6 +60,7 @@ class HomeFragment : Fragment()
         )
         adapter.addAssessment(
             Assessment(
+                assessmentId = 12501,
                 assessmentTitle = "PHQ-9",
                 assessmentName = "Patient Health Questionnaire",
                 description = "Lorem ipsum dolor sit amet..."

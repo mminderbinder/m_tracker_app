@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="assessment_card_transition_name">assessment_card_%1$s</string>
+</resources>
