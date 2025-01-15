@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/fragmentHome"
+    app:startDestination="@id/homeFragment"
     android:id="@+id/nav_graph">
 
     <fragment
-        android:id="@+id/fragmentHome"
+        android:id="@+id/homeFragment"
         android:name="com.example.mtrackerapp.ui.HomeFragment"
         android:label="fragment_home">
 
+        <action
+            android:id="@+id/action_home_to_assessment_detail"
+            app:destination="@id/assessmentDetailsFragment">
+
+            <argument
+                android:name="assessmentId"
+                app:argType="long" />
+        </action>
+
     </fragment>
 
+    <fragment
+        android:id="@+id/assessmentDetailsFragment"
+        android:name="com.example.mtrackerapp.ui.AssessmentDetailsFragment"
+        android:label="assessmentDetailsFragment">
+
+        <argument
+            android:name="assessmentId"
+            app:argType="long" />
+    </fragment>
 </navigation>

@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mtrackerapp.data.Assessment
+import com.example.mtrackerapp.R
+import com.example.mtrackerapp.data.models.Assessment
 import com.example.mtrackerapp.databinding.FragmentHomeBinding
+import com.google.android.material.transition.MaterialElevationScale
 
-class HomeFragment : Fragment()
-{
+class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: AssessmentAdapter
@@ -21,35 +24,46 @@ class HomeFragment : Fragment()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View
-    {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
-    {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
         addAssessments()
     }
 
-    private fun setUpRecyclerView()
-    {
-        adapter = AssessmentAdapter { position ->
-            when (position)
-            {
-                // TODO: Add assessment navigation
+    private fun setUpRecyclerView() {
+        adapter = AssessmentAdapter { view, assessment ->
+
+            exitTransition = MaterialElevationScale(false).apply {
+                duration =
+                    resources.getInteger(com.google.android.material.R.integer.material_motion_duration_long_1)
+                        .toLong()
             }
+            reenterTransition = MaterialElevationScale(true).apply {
+                duration =
+                    resources.getInteger(com.google.android.material.R.integer.material_motion_duration_long_1)
+                        .toLong()
+            }
+            val assessmentCardDetailsTransitionName =
+                getString(R.string.assessment_card_detail_transition_name)
+            val extras = FragmentNavigatorExtras(view to assessmentCardDetailsTransitionName)
+
+            val directions = HomeFragmentDirections
+                .actionHomeToAssessmentDetail(assessment.assessmentId)
+            findNavController().navigate(directions, extras)
         }
         binding.rvAssessmentList.apply {
             this.adapter = this@HomeFragment.adapter
             layoutManager = LinearLayoutManager(context)
+            isTransitionGroup = true
         }
     }
 
-    private fun addAssessments()
-    {
+    private fun addAssessments() {
         adapter.addAssessment(
             Assessment(
                 assessmentId = 12500,
@@ -68,8 +82,7 @@ class HomeFragment : Fragment()
         )
     }
 
-    override fun onDestroyView()
-    {
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
